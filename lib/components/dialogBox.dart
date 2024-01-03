@@ -25,6 +25,9 @@ class DialogBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
               controller: controller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
