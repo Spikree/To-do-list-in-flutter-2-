@@ -51,7 +51,8 @@ class _HomePageState extends State<HomePage> {
         return DialogBox(
           controller: _controller,
           onSave: saveNewTask,
-          onCancle: () => Navigator.of(context).pop(),
+          onCancel: () => Navigator.of(context).pop(),
+          initialTask: null,
         );
       },
     );
@@ -62,6 +63,28 @@ class _HomePageState extends State<HomePage> {
       db.toDoList.removeAt(index);
     });
     db.updateDataBase();
+  }
+
+  void editTask(int index) {
+    _controller.text = db.toDoList[index][0];
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _controller,
+          initialTask: db.toDoList[index][0],
+          onSave: () {
+            setState(() {
+              db.toDoList[index][0] = _controller.text;
+            });
+
+            Navigator.of(context).pop();
+            db.updateDataBase();
+          },
+          onCancel: () => Navigator.of(context).pop(),
+        );
+      },
+    );
   }
 
   @override
@@ -89,6 +112,7 @@ class _HomePageState extends State<HomePage> {
             taskCompleted: db.toDoList[index][1],
             onChanged: (vlaue) => checkBoxChanged(value, index),
             deleteFunction: (context) => deleteTask(index),
+            editFunction: (context) => editTask(index),
           );
         },
       ),

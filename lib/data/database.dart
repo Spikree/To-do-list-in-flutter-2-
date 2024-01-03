@@ -6,8 +6,8 @@ class ToDODataBase {
 
   void createInitialData() {
     toDoList = [
-      ["Get bitches", false],
-      ["Go gym", false]
+      ["Swipe right to edit", false],
+      ["swipe left to delete", false]
     ];
   }
 
